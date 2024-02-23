@@ -2,6 +2,21 @@
 let users = [];
 let editIndex = null;
 
+function mostrarUsuarios() {
+    const lista = document.getElementById("Lista");
+    lista.innerHTML = '';
+  
+    for (var i = 0; i < users.length; i++){
+      // Crear un nuevo elemento li
+      var elementoLi = document.createElement("li");
+      // Asignar el texto con los datos del usuario al elemento li
+      elementoLi.textContent = "Nombre: " + users[i].nombre + " - " + users[i].edad + " años" + " - Posición: " + users[i].pos;
+      // Agregar el elemento li a la lista
+      lista.appendChild(elementoLi);
+    }
+  
+  }
+
 // Función para mostrar la lista de usuarios
 function displayUsers() { 
     // Obtiene el elemento HTML con el id 'userList'
@@ -59,6 +74,7 @@ document.getElementById('addForm').addEventListener('submit', function(event) {
     //Se crea un nuevo objeto que representa al usuario utilizando los valores obtenidos del formulario.
     users.push({ nombre, edad, pos });
     displayUsers();
+    mostrarUsuarios();
     this.reset(); // Limpiar el formulario después de agregar
 });
 
