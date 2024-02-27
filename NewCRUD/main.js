@@ -15,8 +15,7 @@ function mostrarUsuarios() {
       // Agregar el elemento li a la lista
       lista.appendChild(elementoLi);
     }
-  
-  }
+}
 
 // Función para mostrar la lista de usuarios
 function displayUsers() { 
@@ -62,7 +61,6 @@ function displayUsers() {
         cellActions.appendChild(editButton);
     });
 }
-
 
 // Función para agregar un nuevo usuario
 document.getElementById('addForm').addEventListener('submit', function(event) {
@@ -111,41 +109,56 @@ document.getElementById('guardarCambios').addEventListener('click', function() {
     }
 });
 
-
-
-function goini(){
-    //window.location.href = "main.html";
-
+// Función para ir a la página de inicio
+function goini() {
     var inicio = document.getElementById("inicio");
     inicio.style.display = "block";
     var formulario = document.getElementById("Formulario");
     formulario.style.display = "none";
     var menu = document.getElementById("menu");
     menu.style.display = "none";
-};
+    setActiveOption('ini');
+}
 
-
-function gomenu(){
-    //window.location.href = "menu.html";
-
+// Función para ir a la página de menú
+function gomenu() {
     var inicio = document.getElementById("inicio");
     inicio.style.display = "none";
     var formulario = document.getElementById("Formulario");
     formulario.style.display = "none";
     var menu = document.getElementById("menu");
     menu.style.display = "block";
-};
+    setActiveOption('ver-menu');
+}
 
-
-function goGemenu(){
-    //window.location.href = "gestionar.html";
-
+// Función para ir a la página de gestión de menú
+function goGemenu() {
     var inicio = document.getElementById("inicio");
     inicio.style.display = "none";
     var formulario = document.getElementById("Formulario");
     formulario.style.display = "block";
     var menu = document.getElementById("menu");
     menu.style.display = "none";
+    setActiveOption('gestionar-menu');
+}
 
+// Obtener todas las opciones del menú
+const menuOptions = document.querySelectorAll('.menu a');
 
-};
+// Función para agregar la clase activa a la opción seleccionada
+function setActiveOption(selectedOptionId) {
+    // Remover la clase activa de todas las opciones
+    menuOptions.forEach(option => option.classList.remove('active'));
+
+    // Agregar la clase activa a la opción seleccionada
+    document.getElementById(selectedOptionId).classList.add('active');
+}
+
+// Función para agregar la clase activa a la opción seleccionada
+function setActiveOption(selectedOptionId) {
+    // Remover la clase activa de todas las opciones
+    menuOptions.forEach(option => option.classList.remove('active'));
+
+    // Agregar la clase activa a la opción seleccionada
+    document.getElementById(selectedOptionId).classList.add('active');
+}
