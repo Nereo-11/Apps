@@ -9,6 +9,7 @@ function mostrarUsuarios() {
     for (var i = 0; i < users.length; i++){
       // Crear un nuevo elemento li
       var elementoLi = document.createElement("li");
+      var elementoBr = document.createElement("br");
       // Asignar el texto con los datos del usuario al elemento li
       elementoLi.textContent = "Nombre: " + users[i].nombre + " - " + users[i].edad + " años" + " - Posición: " + users[i].pos;
       // Agregar el elemento li a la lista
