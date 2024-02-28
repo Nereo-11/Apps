@@ -20,16 +20,20 @@
     <aside>
         <nav class="menu">
             <ul>
-              <li><a href="#" onclick="goini()">Inicio</a></li>
-              <li><a href="#" onclick="gomenu()">Ver Menú</a></li>
-              <li><a href="#" onclick="goGemenu()">Gestinar Menú</a></li>
+                <li><a href="#" onclick="goini()" id="ini">Inicio</a></li>
+                <li><a href="#" onclick="gomenu()" id="ver-menu">Ver Menú</a></li>
+                <li><a href="#" onclick="goGemenu()" id="gestionar-menu">Gestinar Menú</a></li>
             </ul>
-          </nav>
+        </nav>
+              
     </aside>
     
 
     <div id = "inicio" style="display: block;">
-           <h2>Logo</h2>
+           <img class="logo" src="LOGO.png" alt="">
+           <h2>"Conexión sin fronteras: Desde las estrellas 
+            internacionales <br>hasta los talentos locales, todos
+            tienen un lugar aquí."</h2>
     </div>
 
 
@@ -67,6 +71,8 @@
             <br>
             <!-- Botón para guardar cambios -->
             <button type="button" id="guardarCambios" style="display: none;">Guardar cambios</button>
+            <br>
+            <button type="button" id="CancelarCambios" style="display: none;">Cancelar cambios</button>
         </form>
     
     <!-- Lista de usuarios agregados -->
@@ -89,8 +95,10 @@
     <!-- Enlazar el html a js -->
     <script src="main.js"></script> 
     
-    <br>
-    <p>Equipo: Aranda,Castrejón, Cervantes</p>
+    
+    <footer>
+        <p>Derechos Reservados &copy; 2024-Realizado por Aranda, Castrejón y Cervantes</p>
+    </footer>
     
 </body>
 </html>

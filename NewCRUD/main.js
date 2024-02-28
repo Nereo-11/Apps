@@ -15,8 +15,7 @@ function mostrarUsuarios() {
       // Agregar el elemento li a la lista
       lista.appendChild(elementoLi);
     }
-  
-  }
+}
 
 // Función para mostrar la lista de usuarios
 function displayUsers() { 
@@ -63,26 +62,41 @@ function displayUsers() {
     });
 }
 
-
 // Función para agregar un nuevo usuario
 document.getElementById('addForm').addEventListener('submit', function(event) {
-    event.preventDefault(); //evitar que el formulario se envie, se envia mediante js
-    //los datos que se van a agregar
-    const nombre = document.getElementById('nombre').value;
-    const edad = document.getElementById('edad').value;
-    const pos = document.getElementById('pos').value;
-    //Agregar el nuevo usuario al array users 
-    //Se crea un nuevo objeto que representa al usuario utilizando los valores obtenidos del formulario.
-    users.push({ nombre, edad, pos });
-    displayUsers();
-    mostrarUsuarios();
+
+    var confirmacion = confirm("¿Estás seguro de que deseas agregar este jugador?");
+    if (confirmacion) { 
+      event.preventDefault(); //evitar que el formulario se envie, se envia mediante js
+      //los datos que se van a agregar
+      const nombre = document.getElementById('nombre').value;
+      const edad = document.getElementById('edad').value;
+      const pos = document.getElementById('pos').value;
+      //Agregar el nuevo usuario al array users 
+      //Se crea un nuevo objeto que representa al usuario utilizando los valores obtenidos del formulario.
+      users.push({ nombre, edad, pos });
+      displayUsers();
+      mostrarUsuarios();
     this.reset(); // Limpiar el formulario después de agregar
+
+    } else {
+        document.getElementById('addForm').reset();
+    }
+
+
 });
 
 // Función para eliminar un usuario
 function deleteUser(index) {
-    users.splice(index, 1);
-    displayUsers();
+    var confirmacion = confirm("¿Estás seguro de que deseas continuar?");
+    if (confirmacion) {
+        alert("Acción confirmada"); // Mensaje si se confirma    
+        users.splice(index, 1);
+        displayUsers();
+    } else {
+        alert("Acción cancelada"); // Mensaje si se cancela
+    }
+
 }
 
 // Función para editar un usuario
@@ -93,6 +107,7 @@ function editUser(index) {
     document.getElementById('pos').value = user.pos;
     editIndex = index; // Guardar el índice del usuario que está siendo editado
     document.getElementById('guardarCambios').style.display = 'block'; // Mostrar el botón de guardar cambios
+    document.getElementById('CancelarCambios').style.display = 'block';
 }
 
 // Función para guardar cambios
@@ -107,45 +122,68 @@ document.getElementById('guardarCambios').addEventListener('click', function() {
         displayUsers(); // Actualizar la visualización de los usuarios después de editar
         editIndex = null; // Reiniciar el índice de edición
         document.getElementById('guardarCambios').style.display = 'none'; // Ocultar el botón de guardar cambios
+        document.getElementById('CancelarCambios').style.display = 'none';
         document.getElementById('addForm').reset(); // Limpiar el formulario después de guardar cambios
     }
 });
 
+document.getElementById('CancelarCambios').addEventListener('click', function() {
+    document.getElementById('CancelarCambios').style.display = 'none';
+    document.getElementById('guardarCambios').style.display = 'none';
+    document.getElementById('addForm').reset();
+})
 
 
-function goini(){
-    //window.location.href = "main.html";
-
+// Función para ir a la página de inicio
+function goini() {
     var inicio = document.getElementById("inicio");
     inicio.style.display = "block";
     var formulario = document.getElementById("Formulario");
     formulario.style.display = "none";
     var menu = document.getElementById("menu");
     menu.style.display = "none";
-};
+    setActiveOption('ini');
+}
 
-
-function gomenu(){
-    //window.location.href = "menu.html";
-
+// Función para ir a la página de menú
+function gomenu() {
     var inicio = document.getElementById("inicio");
     inicio.style.display = "none";
     var formulario = document.getElementById("Formulario");
     formulario.style.display = "none";
     var menu = document.getElementById("menu");
     menu.style.display = "block";
-};
+    setActiveOption('ver-menu');
+}
 
-
-function goGemenu(){
-    //window.location.href = "gestionar.html";
-
+// Función para ir a la página de gestión de menú
+function goGemenu() {
     var inicio = document.getElementById("inicio");
     inicio.style.display = "none";
     var formulario = document.getElementById("Formulario");
     formulario.style.display = "block";
     var menu = document.getElementById("menu");
     menu.style.display = "none";
+    setActiveOption('gestionar-menu');
+}
 
+// Obtener todas las opciones del menú
+const menuOptions = document.querySelectorAll('.menu a');
 
-};
+// Función para agregar la clase activa a la opción seleccionada
+function setActiveOption(selectedOptionId) {
+    // Remover la clase activa de todas las opciones
+    menuOptions.forEach(option => option.classList.remove('active'));
+
+    // Agregar la clase activa a la opción seleccionada
+    document.getElementById(selectedOptionId).classList.add('active');
+}
+
+// Función para agregar la clase activa a la opción seleccionada
+function setActiveOption(selectedOptionId) {
+    // Remover la clase activa de todas las opciones
+    menuOptions.forEach(option => option.classList.remove('active'));
+
+    // Agregar la clase activa a la opción seleccionada
+    document.getElementById(selectedOptionId).classList.add('active');
+}
