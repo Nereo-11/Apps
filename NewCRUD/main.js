@@ -34,14 +34,18 @@ function displayUsers() {
         const cellEdad = row.insertCell(1);
         // Inserta una celda para la posición del usuario en la fila creada
         const cellPos = row.insertCell(2);
+        // Inserta una celda para los complementos del usuario en la fila creada
+        const cellComplementos = row.insertCell(3);
         // Inserta una celda para los botones de acciones en la fila creada
-        const cellActions = row.insertCell(3);
+        const cellActions = row.insertCell(4);
 
         // Asigna el nombre, edad y posición del usuario a la celda correspondiente
         cellNombre.textContent = user.nombre;
         cellEdad.textContent = user.edad;
         cellPos.textContent = user.pos;
-
+        // Muestra los complementos como una lista separada por comas
+        cellComplementos.textContent = user.complementos.join(", ");
+        
         // Crea un botón de eliminar
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Eliminar';
@@ -62,29 +66,35 @@ function displayUsers() {
     });
 }
 
+
 // Función para agregar un nuevo usuario
 document.getElementById('addForm').addEventListener('submit', function(event) {
-
     var confirmacion = confirm("¿Estás seguro de que deseas agregar este jugador?");
     if (confirmacion) { 
-      event.preventDefault(); //evitar que el formulario se envie, se envia mediante js
-      //los datos que se van a agregar
-      const nombre = document.getElementById('nombre').value;
-      const edad = document.getElementById('edad').value;
-      const pos = document.getElementById('pos').value;
-      //Agregar el nuevo usuario al array users 
-      //Se crea un nuevo objeto que representa al usuario utilizando los valores obtenidos del formulario.
-      users.push({ nombre, edad, pos });
-      displayUsers();
-      mostrarUsuarios();
-    this.reset(); // Limpiar el formulario después de agregar
-
+        event.preventDefault(); // Evitar que el formulario se envíe, se envía mediante JS
+        // Los datos que se van a agregar
+        const nombre = document.getElementById('nombre').value;
+        const edad = document.getElementById('edad').value;
+        const pos = document.getElementById('pos').value;
+        // Capturar los valores de los checkbox
+        const salsaVerde = document.getElementById('salsaVerde').checked ? "Salsa verde" : "";
+        const salsaRoja = document.getElementById('salsaRoja').checked ? "Salsa roja" : "";
+        // Almacenar los complementos en un array
+        const complementos = [];
+        if (salsaVerde !== "") complementos.push(salsaVerde);
+        if (salsaRoja !== "") complementos.push(salsaRoja);
+        // Agregar el nuevo usuario al array users 
+        // Se crea un nuevo objeto que representa al usuario utilizando los valores obtenidos del formulario.
+        users.push({ nombre, edad, pos, complementos });
+        displayUsers();
+        mostrarUsuarios();
+        this.reset(); // Limpiar el formulario después de agregar
     } else {
         document.getElementById('addForm').reset();
     }
-
-
 });
+
+
 
 // Función para eliminar un usuario
 function deleteUser(index) {
